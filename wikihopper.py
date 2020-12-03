@@ -56,7 +56,7 @@ def bfs(start_url, target_url, max_depth):
     while not q.empty():
         print("Checking node {0}".format(n_nodes))
         curr_node = q.get()
-        if curr_node in visited:
+        if curr_node.url in visited:
             continue
 
         urls = get_urls_in_page(curr_node.url)
@@ -73,7 +73,7 @@ def bfs(start_url, target_url, max_depth):
 
             q.put(tmp_node)
         n_nodes += 1
-        visited.add(curr_node)
+        visited.add(curr_node.url)
 
 
 
