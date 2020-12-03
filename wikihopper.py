@@ -50,15 +50,19 @@ def bfs(start_url, target_url, max_depth):
     start_node = Node(start_url, None)
     q.put(start_node)
 
+    visited = set()
+
     n_nodes = 0
     while not q.empty():
         print("Checking node {0}".format(n_nodes))
         curr_node = q.get()
+        if curr_node in visited:
+            continue
 
         urls = get_urls_in_page(curr_node.url)
         for u in urls:
             tmp_node = Node(u,curr_node)
-            
+
             if tmp_node.url == target_url:
                 print("Found relation at depth {0}".format(tmp_node.depth))
                 return tmp_node
@@ -69,6 +73,9 @@ def bfs(start_url, target_url, max_depth):
 
             q.put(tmp_node)
         n_nodes += 1
+        visited.add(curr_node)
+
+
 
 def main():
 
